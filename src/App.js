@@ -1,51 +1,97 @@
-import React from 'react';
-import TodoList from './components/TodoComponents/TodoList';
-import TodoForm from './components/TodoComponents/TodoForm';
+import React, { Component } from "react";
+import TodoList from "./components/TodoComponents/TodoList";
+import TodoForm from "./components/TodoComponents/TodoForm";
+import './components/TodoComponents/Todo.css';
 
-class App extends React.Component {
+const data = [
+  {
+    task: 'Organize Garage',
+    id: 1528817077286,
+    completed: false
+  },
+  {
+    task: 'Bake Cookies',
+    id: 1528817084358,
+    completed: false
+  },
+  {
+    task: 'Build a Snowman',
+    id: 2,
+    completed: false
+  },
+  {
+    task: 'Fill car with gas',
+    id: 3,
+    completed: false
+  }
+];
 
-  constructor () {
+
+
+class App extends Component {
+  // Constructor with state
+  // 1. initialize state
+  // 2. If you don't use arrow functions, bind the `this` keyword to class methods
+  constructor() {
     super();
     this.state = {
-      data: [
-        {
-          task: 'Organize Garage',
-          id: 1528817077286,
-          completed:false
-        },
-        {
-          task: 'Bake Cookies',
-          id: 1528817084358,
-          completed: false
-        }
-      ]
+      toDos: data
     };
   }
 
-  addItem = (item) => {
-    let newState = {};
-    const newItem = {...item, id:Date.now()};
-    newState = {data: [...this.state.data, newItem]};
-    this.setState(newState);
+  addItem = name => {
+    // update grocery state with a new item
+    const newTask = {
+      task: name,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      toDos: [...this.state.toDos, newTask]
+    });
   };
 
-  clearItems = () => {
+  toggleCompleted = id => {
     this.setState({
-      data: []
+      toDos: this.state.toDos.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            completed: !item.completed
+          };
+        } else {
+          return item;
+        }
+      })
+    });
+  };
+
+  clearCompleted = () => {
+    this.setState({
+      toDos: this.state.toDos.filter(item => !item.completed)
+    });
+  };
+
+  clearAll = () => {
+    this.setState({
+      toDos: []
     });
   };
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <div className="App">
+        <div className="header">
+          <h1>Todo List</h1>
+        </div>
         <TodoList
-          listProps={this.state}
+          toggleCompleted={this.toggleCompleted}
+          toDos={this.state.toDos}
         />
         <TodoForm 
-          addItem = {this.addItem}
-          clearItems = {this.clearItems}
-        />
+        addItem={this.addItem}
+        clearCompleted ={this.clearCompleted}
+        clearAll= {this.clearAll} />
       </div>
     );
   }
