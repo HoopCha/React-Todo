@@ -1,10 +1,17 @@
 import React from 'react';
-
 import Item from './Todo';
+import styled from 'styled-components'
+
+const List = styled.div `
+display: flex;
+flex-wrap:wrap;
+justify-content:center;
+`
+
 
 const TodoList = props => {
   return (
-    <div>
+    <List>
       {props.toDos.map(item => (
         <Item
           key={item.id}
@@ -12,7 +19,7 @@ const TodoList = props => {
           toggleCompleted={props.toggleCompleted}
         />
       ))}
-    </div>
+    </List>
   );
 };
 

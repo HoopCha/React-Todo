@@ -1,4 +1,26 @@
 import React from 'react';
+import styled from 'styled-components'
+
+const Holder = styled.h1`
+display: flex;
+justify-content: space-between;
+`
+const Button = styled.button`
+	font-family: "Lato", sans-serif;
+	font-size: 1rem;
+	font-weight: 800;
+	background-color: #3a405a;
+	color: #de6e4b;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	margin: 10px;
+	border-radius: 6px;
+	:hover {
+		background-color: #de6e4b;
+		color: #3a405a;
+	}
+`;
 
 class TodoForm extends React.Component {
   // Constructor with state
@@ -35,7 +57,7 @@ class TodoForm extends React.Component {
     return (
         <div>
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="item">New Item</label>
+        <label htmlFor="item">New Item  </label>
         <input
           type="text"
           task="item"
@@ -44,10 +66,11 @@ class TodoForm extends React.Component {
           onChange={this.handleChanges}
         />
         <button>Add</button>
-        <button onClick={this.props.clearCompleted}> Clear Completed </button>
-        <button onClick={this.props.clearAll}> Clear All </button>
       </form>
-
+      <Holder>
+      <Button onClick={this.props.clearCompleted}> Clear Completed </Button>
+      <Button onClick={this.props.clearAll}> Clear All </Button>
+      </Holder>
 </div>
     );
   }

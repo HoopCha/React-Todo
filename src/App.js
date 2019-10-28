@@ -2,6 +2,25 @@ import React, { Component } from "react";
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import './components/TodoComponents/Todo.css';
+import styled from 'styled-components'
+
+const Title = styled.h1`
+color: #111; 
+font-family: 'Helvetica Neue', sans-serif; 
+font-size: 3rem; 
+font-weight: bold; 
+letter-spacing: -1px; 
+line-height: 2; 
+text-align: center;
+background: #E7B91B;
+`
+const Holder = styled.h1`
+display: flex;
+flex-direction: column;
+align-items: center;
+width:100%;
+`
+
 
 const data = [
   {
@@ -49,6 +68,7 @@ class App extends Component {
     this.setState({
       toDos: [...this.state.toDos, newTask]
     });
+    
   };
 
   toggleCompleted = id => {
@@ -82,8 +102,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="header">
-          <h1>Todo List</h1>
+          <Title>Todo List</Title>
         </div>
+        <Holder>
         <TodoList
           toggleCompleted={this.toggleCompleted}
           toDos={this.state.toDos}
@@ -92,6 +113,7 @@ class App extends Component {
         addItem={this.addItem}
         clearCompleted ={this.clearCompleted}
         clearAll= {this.clearAll} />
+        </Holder>
       </div>
     );
   }
