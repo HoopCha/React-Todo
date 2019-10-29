@@ -23,46 +23,50 @@ const Button = styled.button`
 `;
 
 class TodoForm extends React.Component {
-  // Constructor with state
-  // add a state property called "newItem"
-  // set the value of "this.state.newItem" to an empty string
-  constructor(props) {
-    super();
-    // const [newItem, setNewItem] = useState('');
-    this.state = {
-      newItem: ''
-    };
 
-    // // explicit binding
-    // this.handleChanges = this.handleChanges.bind(this);
+  constructor() {
+    super();
+    this.state = {
+      newItem: '',
+      newDescription: ''
+    };
   }
 
   handleChanges = e => {
-    // update state with each keystroke
-    // setNewItem(e.target.value)
+    console.log(this.state)
+    const name = e.target.name;
+    const value = e.target.value;
+    
     this.setState({
-      newItem: e.target.value
+      ...this.state,
+      [name]: value
     });
   };
 
-  // class method to submit form
+
   handleSubmit = e => {
     e.preventDefault();
-    // add our typed in item to the grocery list!
-    this.props.addItem(this.state.newItem);
-    this.setState({ newItem: '' });
+    this.props.addItem(this.state.newItem, this.state.newDescription);
+    this.setState({ newItem: '', newDescription: '' });
   };
 
   render() {
     return (
         <div>
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="item">New Item  </label>
+        <label htmlFor="item">New Todo  </label>
         <input
           type="text"
-          task="item"
-          id="item"
+          name="newItem"
+          placeholder="Todo Title" 
           value={this.state.newItem}
+          onChange={this.handleChanges}
+        />
+        <input
+          type="text"
+          name="newDescription"
+          placeholder="Todo Description" 
+          value={this.state.newDescription}
           onChange={this.handleChanges}
         />
         <button>Add</button>

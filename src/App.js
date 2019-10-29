@@ -24,22 +24,23 @@ width:100%;
 
 const data = [
   {
-    task: 'Organize Garage',
+    taskTitle: 'Organize Garage',
+    taskDescription: "test",
     id: 1528817077286,
     completed: false
   },
   {
-    task: 'Bake Cookies',
+    taskTitle: 'Bake Cookies',
     id: 1528817084358,
     completed: false
   },
   {
-    task: 'Build a Snowman',
+    taskTitle: 'Build a Snowman',
     id: 2,
     completed: false
   },
   {
-    task: 'Fill car with gas',
+    taskTitle: 'Fill car with gas',
     id: 3,
     completed: false
   }
@@ -48,9 +49,6 @@ const data = [
 
 
 class App extends Component {
-  // Constructor with state
-  // 1. initialize state
-  // 2. If you don't use arrow functions, bind the `this` keyword to class methods
   constructor() {
     super();
     this.state = {
@@ -58,15 +56,16 @@ class App extends Component {
     };
   }
 
-  addItem = name => {
+  addItem = (name, description) => {
     // update grocery state with a new item
     const newTask = {
-      task: name,
+      taskTitle: name,
+      taskDescription: description,
       id: Date.now(),
       completed: false
     };
     this.setState({
-      toDos: [...this.state.toDos, newTask]
+      toDos: [newTask, ...this.state.toDos]
     });
     
   };

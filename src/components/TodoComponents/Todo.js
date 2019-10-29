@@ -21,15 +21,16 @@ margin: 25px;
 background: #126BBF;
 `
 
-const Item = props => {
+const Todo = props => {
   return (
     <Test
       className={`item${props.task.completed ? ' completed' : ''}`}
       onClick={() => props.toggleCompleted(props.task.id)}
     >
-      <Task>{props.task.task}</Task>
+      <Task>{props.task.taskTitle}</Task>
+      <p>{props.task.taskDescription}</p>
     </Test>
   );
 };
 
-export default Item;
+export default Todo;

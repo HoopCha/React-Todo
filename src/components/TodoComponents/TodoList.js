@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from './Todo';
+import Todo from './Todo';
 import styled from 'styled-components'
 
 const List = styled.div `
@@ -13,7 +13,7 @@ const TodoList = props => {
   return (
     <List>
       {props.toDos.map(item => (
-        <Item
+        <Todo
           key={item.id}
           task={item}
           toggleCompleted={props.toggleCompleted}
